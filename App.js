@@ -14,6 +14,8 @@ import Bottom from './App/Components/Bottom/index.ios';
 import Arthur from './App/Components/ShowArthur/index.ios';
 import TopBar1 from './App/Components/TopBar/TopBar1/index.ios';
 import TopBar2 from './App/Components/TopBar/TopBar2/index.ios';
+import TouchBar1 from './App/Components/TouchableHighlight/index.ios';
+import FetchInfo from './App/Components/Network/Api';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -35,10 +37,12 @@ export default class App extends Component<Props> {
         </View>
         <View style={styles.mainPage}>
           <Arthur></Arthur>
+          <TouchBar1></TouchBar1>
         </View>
         <View style={styles.bottom}>
           <Bottom></Bottom>
         </View>
+        <FetchInfo></FetchInfo>
       </View>
     );
   }
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   mainPage: {
-    
+
   },
   bottom: {
     height: 48,
