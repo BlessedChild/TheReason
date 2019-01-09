@@ -38,11 +38,11 @@ export default class App extends Component<Props> {
         <View style={styles.mainPage}>
           <Arthur></Arthur>
           <TouchBar1></TouchBar1>
+          <FetchInfo></FetchInfo>
         </View>
         <View style={styles.bottom}>
           <Bottom></Bottom>
         </View>
-        <FetchInfo></FetchInfo>
       </View>
     );
   }
@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    height: '92%'
+    alignItems: 'stretch'
   },
   top1: {
     marginTop: 48,
@@ -66,7 +65,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   mainPage: {
-
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch'
   },
   bottom: {
     height: 48,
