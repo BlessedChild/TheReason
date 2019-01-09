@@ -36,8 +36,6 @@ export default class App extends Component<Props> {
           <TopBar2></TopBar2>
         </View>
         <View style={styles.mainPage}>
-          <Arthur></Arthur>
-          <TouchBar1></TouchBar1>
           <FetchInfo></FetchInfo>
         </View>
         <View style={styles.bottom}>
@@ -67,7 +65,7 @@ const styles = StyleSheet.create({
   mainPage: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start', 
     alignItems: 'stretch'
   },
   bottom: {
