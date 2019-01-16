@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image } from 'react-native';
 
 // 导入我自己写的组件
 import Bottom from './App/Components/Bottom/index.ios';
@@ -36,8 +36,11 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <View style={styles.top1}>
           <TopBar1>
-            <img src="./Database/1.jpg"></img>
           </TopBar1>
+          <Image
+            source={{ uri: 'https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/1.jpg' }}
+            style={{ width: '100%', height: 180, resizeMode: 'cover' }}
+          />
         </View>
         <View style={styles.top2}>
           <TopBar2></TopBar2>
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
   mainPage: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start', 
+    justifyContent: 'flex-start',
     alignItems: 'stretch'
   },
   bottom: {

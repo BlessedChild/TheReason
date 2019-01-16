@@ -5,7 +5,7 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
       <View>
-        <Text>TopBar1</Text>
+        <Text>我留在这里的理由</Text>
       </View>
     );
   }
