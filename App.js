@@ -35,7 +35,9 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.top1}>
-          <TopBar1></TopBar1>
+          <TopBar1>
+            <img src="./Database/1.jpg"></img>
+          </TopBar1>
         </View>
         <View style={styles.top2}>
           <TopBar2></TopBar2>
