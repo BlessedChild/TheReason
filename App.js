@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image } from 'react-native';
+import { Platform, StyleSheet, View, SafeAreaView } from 'react-native';
 
 // 导入我自己写的组件
 import Bottom from './App/Components/Bottom/index.ios';
@@ -33,60 +33,42 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.top1}>
-          <TopBar1>
-          </TopBar1>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <View>
+            <TopBar1>
+            </TopBar1>
+          </View>
+          <View>
+            <TopBar2></TopBar2>
+          </View>
+          <View style={styles.mainPage}>
+            <FetchInfo>
+            </FetchInfo>
+          </View>
+          <View>
+            <Bottom></Bottom>
+          </View>
         </View>
-        <View style={styles.top2}>
-          <TopBar2></TopBar2>
-        </View>
-        <View style={styles.mainPage}>
-          <FetchInfo>
-          </FetchInfo>
-        </View>
-        <View style={styles.bottom}>
-          <Bottom></Bottom>
-        </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'stretch'
   },
-  top1: {
-    marginTop: 48,
-    height: 48,
-    backgroundColor: 'green'
-  },
-  top2: {
-    height: 48,
-    backgroundColor: 'red'
-  },
   mainPage: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'stretch'
-  },
-  bottom: {
-    height: 48,
-    backgroundColor: 'green'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  },
+  }
 });
