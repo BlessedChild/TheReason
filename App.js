@@ -37,16 +37,13 @@ export default class App extends Component<Props> {
         <View style={styles.top1}>
           <TopBar1>
           </TopBar1>
-          <Image
-            source={{ uri: 'https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/1.jpg' }}
-            style={{ width: '100%', height: 180, resizeMode: 'cover' }}
-          />
         </View>
         <View style={styles.top2}>
           <TopBar2></TopBar2>
         </View>
         <View style={styles.mainPage}>
-          <FetchInfo></FetchInfo>
+          <FetchInfo>
+          </FetchInfo>
         </View>
         <View style={styles.bottom}>
           <Bottom></Bottom>
