@@ -52,7 +52,7 @@ export default class FetchExample extends React.Component {
                                     </View>
                                 </View>
                                 <Image
-                                    source={{ uri: 'https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/1.jpg' }}
+                                    source={{ uri: item.imgUri }}
                                     style={{ width: 100, height: 100, resizeMode: 'cover' }}
                                 />
                             </View>
