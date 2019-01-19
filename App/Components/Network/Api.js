@@ -5,29 +5,113 @@ export default class FetchExample extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { isLoading: true }
+        this.state = {
+            refreshing: false,
+            isLoading: false,
+            dataSource: [],
+            updateTimeStatus: 1,
+            // page: 1,
+            // seed: 1,
+            error: null,
+            loadComplete: false,
+            isdownloading: false,
+            isFirstLoading: true
+        };
     }
 
     componentDidMount() {
-        return fetch('https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/movies5.json')
-            .then((response) => response.json())
-            .then((responseJson) => {
-
-                this.setState({
-                    isLoading: false,
-                    dataSource: responseJson.movies,
-                }, function () {
-
-                });
-
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        this.doRemoteRequest();
     }
 
+    doRemoteRequest = () => {
+        const { updateTimeStatus, page, seed } = this.state;
+        // const requestUrl = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+        const requestUrl = 'https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/movies5.json';
+        this.setState({ isLoading: true, loadComplete: false });
+
+        setTimeout(() => {
+            fetch(requestUrl)
+                .then((response) => response.json())
+                .then((responseJson) => {
+
+                    this.setState({
+                        // dataSource: responseJson.movies,
+                        // dataSource: page === 1 ? res.results : [...this.state.data, ...res.results],
+                        // dataSource: updateTimeStatus === 1 ? responseJson.movies : [...this.state.dataSource, ...responseJson.movies],
+                        dataSource: responseJson.movies,
+                        error: responseJson.error || null,
+                        refreshing: false,
+                        isLoading: false,
+                        loadComplete: true,
+                        isdownloading: false,
+                        isFirstLoading: false
+                    }, function () {
+
+                    });
+
+                })
+                .catch((error) => {
+                    this.setState({ error, loading: false });
+                    console.error(error);
+                });
+        }, 1500);
+    }
+
+    // 向下拉取时刷新文章
+    handleRefresh = () => {
+        this.setState(
+            {
+                refreshing: true
+            },
+            () => {
+                this.doRemoteRequest();
+            }
+        );
+    };
+
+    // 向上拉取时会加载更多的文章
+    handleLoadMore = () => {
+        this.setState(
+            {
+                // page: this.state.page + 1
+                // updateTimeStatus: this.state.page + 1,
+                isdownloading: true
+            },
+            () => {
+                this.renderFooter();
+            }
+        );
+    };
+
+    /*
+    // （顶部渲染）
+    renderHeader = () => {
+        return <SearchBar placeholder="Type Here..." lightTheme round />;
+    };
+    */
+
+    // 向上拉取时底部的动画效果(底部渲染)
+    renderFooter = () => {
+        if (this.state.loadComplete && this.state.isloading && this.state.isdownloading) {
+            return (
+                <View
+                    style={{
+                        paddingVertical: 20,
+                        borderTopWidth: 1,
+                        borderColor: "#CED0CE"
+                    }}
+                >
+                    <ActivityIndicator animating size="large" />
+                </View>
+            );
+        } else {
+            return null;
+        }
+    };
+
     render() {
-        if (this.state.isLoading) {
+
+        if (this.state.isFirstLoading) {
             return (
                 <View style={{ flex: 1, padding: 20 }}>
                     <ActivityIndicator />
@@ -35,12 +119,12 @@ export default class FetchExample extends React.Component {
             )
         }
 
+
         // 中间的内容页
         // 文章简介+作者+更新时间+图片
         return (
             <View style={{ flex: 1, paddingTop: 0 }}>
                 <FlatList
-                    data={this.state.dataSource}
                     renderItem={({ item }) =>
                         <View>
                             <View style={styles.eachArticleBar}>
@@ -61,6 +145,13 @@ export default class FetchExample extends React.Component {
                             </View>
                         </View>
                     }
+                    // ListHeaderComponent={this.renderHeader}
+                    ListFooterComponent={this.renderFooter}
+                    refreshing={this.state.refreshing} // 刷新
+                    onRefresh={this.handleRefresh} // 视图开始刷新时调用
+                    data={this.state.dataSource}
+                    onEndReached={this.handleLoadMore} // 在所有行都已渲染并且列表已滚动到底部的onEndReachedThreshold内时调用。提供了本机滚动事件
+                    onEndReachedThreshold={0.1} // 用于调用onEndReached的像素阈值（虚拟，非物理）。
                     keyExtractor={({ id }, index) => id}
                 />
             </View>
