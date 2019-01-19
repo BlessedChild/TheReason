@@ -14,6 +14,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  // Set time of startup screen
+  [NSThread sleepForTimeInterval:3.0];
+  
   NSURL *jsCodeLocation;
 
   #ifdef DEBUG
