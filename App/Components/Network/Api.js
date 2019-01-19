@@ -9,7 +9,7 @@ export default class FetchExample extends React.Component {
     }
 
     componentDidMount() {
-        return fetch('https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/movies4.json')
+        return fetch('https://raw.githubusercontent.com/BlessedChild/TheReason/master/Database/movies5.json')
             .then((response) => response.json())
             .then((responseJson) => {
 
